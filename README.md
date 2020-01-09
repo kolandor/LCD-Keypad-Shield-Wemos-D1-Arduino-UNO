@@ -1,1 +1,1 @@
-# -Wemos-D1-LED-display
+# Wemos D1 LED display
