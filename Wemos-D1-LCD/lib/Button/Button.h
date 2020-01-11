@@ -1,4 +1,4 @@
-enum Buttons
+enum Button
 {
     Select = 0,
     Left = 1,
