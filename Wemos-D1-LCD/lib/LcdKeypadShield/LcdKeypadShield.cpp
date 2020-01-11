@@ -1,29 +1,28 @@
 #include "LcdKeypadShield.h"
 #include "WemosD1R1Pins.h"
 
-LcdKeypadShield::LcdKeypadShield(BoardType board)
+LcdKeypadShield::LcdKeypadShield(const uint8_t &rs,const  uint8_t &enable, 
+                                const uint8_t &d4,const  uint8_t &d5,const  uint8_t &d6,const  uint8_t &d7) : 
+                                LiquidCrystal(rs, enable, d4, d5, d6, d7)
 {
-    switch (board)
-    {
-    case UNO:
-        LcdKeypadShield(8,9,4,5,6,7);
-        break;
-
-    case WemosD1R1:
-        LcdKeypadShield(D8,D9,D4,D5,D6,D7);
-        break;
-    }
-}
-
-LcdKeypadShield::LcdKeypadShield(uint8_t rs, uint8_t enable, uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
-{
-    this->lcd = new LiquidCrystal(rs, enable, d4, d5, d6, d7);
 }
 
 LcdKeypadShield::~LcdKeypadShield()
 {
-    if(this->lcd != nullptr)
+}
+
+LcdKeypadShield LcdKeypadShield::createByBoaard(const BoardType &board)
+{
+    switch (board)
     {
-        delete this->lcd;
+    case UNO:
+        return LcdKeypadShield(8,9,4,5,6,7);
+        break;
+
+    case WemosD1R1:
+        return LcdKeypadShield(D8,D9,D4,D5,D6,D7);
+        break;
     }
+
+    return LcdKeypadShield(0,0,0,0,0,0);
 }
