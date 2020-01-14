@@ -55,9 +55,12 @@ Button LcdKeypadShield::getButton()
     return None;
 }
 
-/*void setButtonAnalogValue(Button button, int analogButtonValue);
+void LcdKeypadShield::setButtonAnalogValue(const Button &button,const int &analogButtonValue)
+{
+    this->_buttonsValues[static_cast<int>(button)] = analogButtonValue;
+}
 
-void userButtonsAutoCorrect();
+/*void userButtonsAutoCorrect();
 
 int getResistorDeviation();
 

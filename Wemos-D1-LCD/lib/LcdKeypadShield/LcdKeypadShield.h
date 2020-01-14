@@ -46,7 +46,7 @@ public:
     Button getButton();
 
     /*Manual setting of analog button value*/
-    void setButtonAnalogValue(Button button, int analogButtonValue);
+    void setButtonAnalogValue(const Button &button,const int &analogButtonValue);
 
     /*Automatically adjust button values using the user menu.
     The method helps a lot if you need to constantly change the shield or if you need quick setup*/
