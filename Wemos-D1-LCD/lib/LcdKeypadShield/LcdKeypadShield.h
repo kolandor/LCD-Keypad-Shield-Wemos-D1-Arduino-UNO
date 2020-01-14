@@ -5,13 +5,18 @@
 class LcdKeypadShield : public LiquidCrystal
 {
 private:
+    /*Default resistor deviation*/
+    const static int _defaultResistorCurrentDeviation = 25;
+
+    /*Buttons analog pin*/
+    int _analogBtn;
 
     /*The number of buttons on the shield*/
     const static int _buttonsCount = 5;
 
     /*This variable takes into account the possible 
     unstable current value when reading the analog button*/
-    const int _resistorCurrentDeviation = 25;
+    int _resistorCurrentDeviation;
     
     //Buttons analog values
     int _buttonsValues[_buttonsCount]{0};
@@ -19,7 +24,8 @@ private:
 public:
     //Arbitrary connection of pins to LCD
     LcdKeypadShield(const uint8_t &rs,const uint8_t &enable, 
-                    const uint8_t &d4,const  uint8_t &d5,const uint8_t &d6,const uint8_t &d7);
+                    const uint8_t &d4,const  uint8_t &d5,const uint8_t &d6,const uint8_t &d7,
+                    const int &aBtnPin);
 
     ~LcdKeypadShield();
 
