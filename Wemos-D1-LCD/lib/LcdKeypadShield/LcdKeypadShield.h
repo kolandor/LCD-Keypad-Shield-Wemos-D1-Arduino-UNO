@@ -33,11 +33,22 @@ public:
     The detode will automatically initialize the display for your board*/
     static LcdKeypadShield createByBoaard(const BoardType &board);
 
+    /*Button press check*/
     bool isAvailableButton();
 
+    /*Returns the pressed button*/
     Button getButton();
 
-    void setButtonValue(Button button, int analogButtonValue);
+    /*Manual setting of analog button value*/
+    void setButtonAnalogValue(Button button, int analogButtonValue);
 
+    /*Automatically adjust button values using the user menu.
+    The method helps a lot if you need to constantly change the shield or if you need quick setup*/
     void userButtonsAutoCorrect();
+
+    /*Returns the deviation of the resistor values ​​when the button contacts fluctuate*/
+    int getResistorDeviation();
+
+    /*Set the deviation of the resistor values ​​when the button contacts fluctuate*/
+    void setResistorDeviation(const int &resistorDeviation);
 };
