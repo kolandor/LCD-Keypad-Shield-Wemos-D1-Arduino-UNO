@@ -41,13 +41,13 @@ Button LcdKeypadShield::getButton()
 {
     int analogValue = analogRead(this->_analogBtnPin);
 
-    if (isAvailableButton())
+    if (!isInRarnge(analogValue, this->_noKeyAnalogValue))
     {
-        for (size_t i = 0; i < this->_buttonsCount; i++)
+        for (size_t btnIndex = 0; btnIndex < this->_buttonsCount; btnIndex++)
         {
-            if (/* condition */)
+            if (isInRarnge(analogValue, this->_buttonsValues[btnIndex]))
             {
-                /* code */
+                return static_cast<Button>(btnIndex);
             }
         }
     }
