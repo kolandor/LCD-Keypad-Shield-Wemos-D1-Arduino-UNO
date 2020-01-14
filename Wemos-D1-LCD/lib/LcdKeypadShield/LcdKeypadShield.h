@@ -9,17 +9,23 @@ private:
     const static int _defaultResistorCurrentDeviation = 25;
 
     /*Buttons analog pin*/
-    int _analogBtn;
+    int _analogBtnPin;
 
     /*The number of buttons on the shield*/
     const static int _buttonsCount = 5;
+
+    /*Analog max value (no key pressed)*/
+    const static int _noKeyAnalogValue = 1024;
 
     /*This variable takes into account the possible 
     unstable current value when reading the analog button*/
     int _resistorCurrentDeviation;
     
     //Buttons analog values
-    int _buttonsValues[_buttonsCount]{0};
+    int _buttonsValues[_buttonsCount]{-1};
+
+    /*Check if the value is within the deviation with the resistor*/
+    bool isInRarnge(const int &analogValue, const int &etalonValue);
 
 public:
     //Arbitrary connection of pins to LCD

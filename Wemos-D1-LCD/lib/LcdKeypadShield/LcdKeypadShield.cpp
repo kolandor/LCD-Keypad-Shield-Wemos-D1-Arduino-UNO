@@ -1,11 +1,13 @@
 #include "LcdKeypadShield.h"
 #include "WemosD1R1Pins.h"
 
+//////////////////////////////////////PUBLIC METHODS//////////////////////////////////////
+
 LcdKeypadShield::LcdKeypadShield(const uint8_t &rs,const  uint8_t &enable, 
                                 const uint8_t &d4,const  uint8_t &d5,const  uint8_t &d6,const  uint8_t &d7, const int &aBtnPin) : 
                                 LiquidCrystal(rs, enable, d4, d5, d6, d7)
 {
-    this->_analogBtn = aBtnPin;
+    this->_analogBtnPin = aBtnPin;
     this->_resistorCurrentDeviation = this->_defaultResistorCurrentDeviation;
 }
 
@@ -27,4 +29,27 @@ LcdKeypadShield LcdKeypadShield::createByBoaard(const BoardType &board)
     }
 
     return LcdKeypadShield(0, 0, 0, 0, 0, 0, 0);
+}
+
+
+bool LcdKeypadShield::isAvailableButton()
+{
+    return !isInRarnge(analogRead(this->_analogBtnPin), this->_noKeyAnalogValue);
+}
+
+/*Button getButton();
+
+void setButtonAnalogValue(Button button, int analogButtonValue);
+
+void userButtonsAutoCorrect();
+
+int getResistorDeviation();
+
+void setResistorDeviation(const int &resistorDeviation);*/
+
+//////////////////////////////////////PRIVATE METHODS//////////////////////////////////////
+
+bool LcdKeypadShield::isInRarnge(const int &analogValue, const int &etalonValue)
+{
+    return this->_resistorCurrentDeviation - etalonValue < analogValue && etalonValue + this->_resistorCurrentDeviation > analogValue;
 }
