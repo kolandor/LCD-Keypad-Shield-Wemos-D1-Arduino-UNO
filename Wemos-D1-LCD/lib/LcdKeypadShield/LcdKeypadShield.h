@@ -22,7 +22,7 @@ private:
     int _resistorCurrentDeviation;
     
     //Buttons analog values
-    int _buttonsValues[_buttonsCount]{-1};
+    int _buttonsValues[_buttonsCount]{_noKeyAnalogValue};
 
     /*Check if the value is within the deviation with the resistor*/
     bool isInRarnge(const int &analogValue, const int &etalonValue);

@@ -37,9 +37,25 @@ bool LcdKeypadShield::isAvailableButton()
     return !isInRarnge(analogRead(this->_analogBtnPin), this->_noKeyAnalogValue);
 }
 
-/*Button getButton();
+Button LcdKeypadShield::getButton()
+{
+    int analogValue = analogRead(this->_analogBtnPin);
 
-void setButtonAnalogValue(Button button, int analogButtonValue);
+    if (isAvailableButton())
+    {
+        for (size_t i = 0; i < this->_buttonsCount; i++)
+        {
+            if (/* condition */)
+            {
+                /* code */
+            }
+        }
+    }
+    
+    return None;
+}
+
+/*void setButtonAnalogValue(Button button, int analogButtonValue);
 
 void userButtonsAutoCorrect();
 
