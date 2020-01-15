@@ -34,18 +34,18 @@ LcdKeypadShield LcdKeypadShield::createByBoaard(const BoardType &board)
 
 bool LcdKeypadShield::isAvailableButton()
 {
-    return !isInRarnge(analogRead(this->_analogBtnPin), this->_noKeyAnalogValue);
+    return !isInRange(analogRead(this->_analogBtnPin), this->_noKeyAnalogValue);//////////////////ОШИБКА ПО КАКОЙТО ПРИЧИНЕ ИМЕННО В ЭТОМ МЕСТЕ
 }
 
 Button LcdKeypadShield::getButton()
 {
     int analogValue = analogRead(this->_analogBtnPin);
 
-    if (!isInRarnge(analogValue, this->_noKeyAnalogValue))
+    if (!isInRange(analogValue, this->_noKeyAnalogValue))
     {
         for (size_t btnIndex = 0; btnIndex < this->_buttonsCount; btnIndex++)
         {
-            if (isInRarnge(analogValue, this->_buttonsValues[btnIndex]))
+            if (isInRange(analogValue, this->_buttonsValues[btnIndex]))
             {
                 return static_cast<Button>(btnIndex);
             }
@@ -60,15 +60,63 @@ void LcdKeypadShield::setButtonAnalogValue(const Button &button,const int &analo
     this->_buttonsValues[static_cast<int>(button)] = analogButtonValue;
 }
 
-/*void userButtonsAutoCorrect();
+int LcdKeypadShield::userButtonsAutoCorrect()
+{
+    return isAvailableButton();//getAverageBtnValue();
+}
 
-int getResistorDeviation();
+int LcdKeypadShield::getResistorDeviation()
+{
+    return this->_resistorCurrentDeviation;
+}
 
-void setResistorDeviation(const int &resistorDeviation);*/
+void LcdKeypadShield::setResistorDeviation(const int &resistorDeviation)
+{
+    this->_resistorCurrentDeviation = resistorDeviation;
+}
 
 //////////////////////////////////////PRIVATE METHODS//////////////////////////////////////
 
-bool LcdKeypadShield::isInRarnge(const int &analogValue, const int &etalonValue)
+bool LcdKeypadShield::isInRange(const int &analogValue, const int &etalonValue)
 {
     return this->_resistorCurrentDeviation - etalonValue < analogValue && etalonValue + this->_resistorCurrentDeviation > analogValue;
+}
+
+int LcdKeypadShield::getAverageBtnValue()
+{
+    const int checkIterations = 10;
+
+    int analogBtnValue = 0;
+
+    int i = 0;
+    
+    int analogValue = 0;
+    
+    while (i < checkIterations)
+    {
+        analogValue = analogRead(this->_analogBtnPin);
+
+        if (!this->isInRange(analogValue, this->_noKeyAnalogValue))//////////////////ОШИБКА ПО КАКОЙТО ПРИЧИНЕ ИМЕННО В ЭТОМ МЕСТЕ
+        {
+            bool isNotContain = true;
+
+            for (size_t btnIndex = 0; btnIndex < this->_buttonsCount; btnIndex++)
+            {
+                if (this->isInRange(analogValue, this->_buttonsValues[btnIndex]))
+                {
+                    isNotContain = false;
+                    break;
+                }
+            }
+
+            if (isNotContain)
+            {
+                analogBtnValue += analogValue;
+                i++;//////////////////НЕ ПОНЯТНА КОРРИЛЯЦИЯ
+            }
+        }
+        delay(300);
+    }
+
+    return analogBtnValue / checkIterations;
 }

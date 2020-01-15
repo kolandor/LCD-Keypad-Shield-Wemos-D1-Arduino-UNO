@@ -1,6 +1,6 @@
 #include <LiquidCrystal.h>
-#include "BoardType.h"
 #include "Button.h"
+#include "BoardType.h"
 
 class LcdKeypadShield : public LiquidCrystal
 {
@@ -24,8 +24,7 @@ private:
     //Buttons analog values
     int _buttonsValues[_buttonsCount]{_noKeyAnalogValue};
 
-    /*Check if the value is within the deviation with the resistor*/
-    bool isInRarnge(const int &analogValue, const int &etalonValue);
+    
 
 public:
     //Arbitrary connection of pins to LCD
@@ -34,6 +33,12 @@ public:
                     const int &aBtnPin);
 
     ~LcdKeypadShield();
+
+    /*Check if the value is within the deviation with the resistor*/
+    bool isInRange(const int &analogValue, const int &etalonValue);
+
+    /*Get average analog value for user set*/
+    int getAverageBtnValue();
 
     /*This method can be used if the shield display is connected directly to the board. 
     The detode will automatically initialize the display for your board*/
@@ -50,7 +55,7 @@ public:
 
     /*Automatically adjust button values using the user menu.
     The method helps a lot if you need to constantly change the shield or if you need quick setup*/
-    void userButtonsAutoCorrect();
+    int userButtonsAutoCorrect();
 
     /*Returns the deviation of the resistor values ​​when the button contacts fluctuate*/
     int getResistorDeviation();
