@@ -1,4 +1,4 @@
-# Wemos D1 LED display
+# Wemos D1 / Arduino UNO LED display
 
 A library that simplifies connecting and configuring the LCD Keypad Shield to Wemos D1 and Arduino UNO.
 
