@@ -8,7 +8,7 @@ LcdKeypadShield::LcdKeypadShield(const uint8_t &rs,const  uint8_t &enable,
                                 LiquidCrystal(rs, enable, d4, d5, d6, d7)
 {
     this->_analogBtnPin = aBtnPin;
-    this->_resistorCurrentDeviation = this->_defaultResistorCurrentDeviation;
+    this->_resistorCurrentDeviation = LcdKeypadShield::_defaultResistorCurrentDeviation;
 }
 
 LcdKeypadShield::~LcdKeypadShield()
@@ -34,16 +34,16 @@ LcdKeypadShield LcdKeypadShield::createByBoaard(const BoardType &board)
 
 bool LcdKeypadShield::isAvailableButton()
 {
-    return !isInRange(analogRead(this->_analogBtnPin), this->_noKeyAnalogValue);
+    return !isInRange(analogRead(this->_analogBtnPin), (int)LcdKeypadShield::_noKeyAnalogValue);
 }
 
 Button LcdKeypadShield::getButton()
 {
     int analogValue = analogRead(this->_analogBtnPin);
 
-    if (!isInRange(analogValue, this->_noKeyAnalogValue))
+    if (!isInRange(analogValue, (int)LcdKeypadShield::_noKeyAnalogValue))
     {
-        for (size_t btnIndex = 0; btnIndex < this->_buttonsCount; btnIndex++)
+        for (size_t btnIndex = 0; btnIndex < LcdKeypadShield::_buttonsCount; btnIndex++)
         {
             if (isInRange(analogValue, this->_buttonsValues[btnIndex]))
             {
