@@ -53,7 +53,7 @@ public:
     void setButtonAnalogValue(const Button &button,const int &analogButtonValue);
 
     /*Returns the deviation of the resistor values ​​when the button contacts fluctuate*/
-    //int getResistorDeviation();
+    int getResistorDeviation();
 
     /*Set the deviation of the resistor values ​​when the button contacts fluctuate*/
     //void setResistorDeviation(const int &resistorDeviation);
