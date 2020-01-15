@@ -65,12 +65,12 @@ int LcdKeypadShield::getResistorDeviation()
     return this->_resistorCurrentDeviation;
 }
 
-/*void LcdKeypadShield::setResistorDeviation(const int &resistorDeviation)
+void LcdKeypadShield::setResistorDeviation(const int &resistorDeviation)
 {
     this->_resistorCurrentDeviation = resistorDeviation;
 }
 
-void LcdKeypadShield::userButtonsAutoCorrect()
+/*void LcdKeypadShield::userButtonsAutoCorrect()
 {
 
 }*/
@@ -88,11 +88,11 @@ int LcdKeypadShield::getAverageBtnValue()
 
     int analogBtnValue = 0;
 
-    int i = 0;
+    int iterator = 0;
     
     int analogValue = 0;
     
-    while (i < checkIterations)
+    while (iterator < checkIterations)
     {
         analogValue = analogRead(this->_analogBtnPin);
 
@@ -112,7 +112,7 @@ int LcdKeypadShield::getAverageBtnValue()
             if (isNotContain)
             {
                 analogBtnValue += analogValue;
-                i++;
+                iterator++;
             }
         }
         delay(300);
