@@ -25,8 +25,12 @@ private:
     //Buttons analog values
     int _buttonsValues[_buttonsCount]{_noKeyAnalogValue};
 
-    
+    /*Check if the value is within the deviation with the resistor*/
+    bool isInRange(const int &analogValue,const int &etalonValue);
 
+    /*Get average analog value for user set*/
+    int getAverageBtnValue();
+    
 public:
     //Arbitrary connection of pins to LCD
     LcdKeypadShield(const uint8_t &rs,const uint8_t &enable, 
@@ -34,12 +38,6 @@ public:
                     const int &aBtnPin);
 
     ~LcdKeypadShield();
-
-    /*Check if the value is within the deviation with the resistor*/
-    bool isInRange(const int &analogValue, const int &etalonValue);
-
-    /*Get average analog value for user set*/
-    int getAverageBtnValue();
 
     /*This method can be used if the shield display is connected directly to the board. 
     The detode will automatically initialize the display for your board*/
@@ -62,5 +60,5 @@ public:
     
     /*Automatically adjust button values using the user menu.
     The method helps a lot if you need to constantly change the shield or if you need quick setup*/
-    //void userButtonsAutoCorrect();
+    void userButtonsAutoCorrect();
 };

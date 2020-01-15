@@ -77,12 +77,12 @@ void LcdKeypadShield::userButtonsAutoCorrect()
 
 //////////////////////////////////////PRIVATE METHODS//////////////////////////////////////
 
-bool LcdKeypadShield::isInRange(const int &analogValue, const int &etalonValue)
+bool LcdKeypadShield::isInRange(const int &analogValue,const int &etalonValue)
 {
     return this->_resistorCurrentDeviation - etalonValue < analogValue && etalonValue + this->_resistorCurrentDeviation > analogValue;
 }
 
-/*int LcdKeypadShield::getAverageBtnValue()
+int LcdKeypadShield::getAverageBtnValue()
 {
     const int checkIterations = 10;
 
@@ -96,13 +96,13 @@ bool LcdKeypadShield::isInRange(const int &analogValue, const int &etalonValue)
     {
         analogValue = analogRead(this->_analogBtnPin);
 
-        if (!this->isInRange(analogValue, this->_noKeyAnalogValue))
+        if (!isInRange(analogValue, (int)this->_noKeyAnalogValue))
         {
             bool isNotContain = true;
 
             for (size_t btnIndex = 0; btnIndex < this->_buttonsCount; btnIndex++)
             {
-                if (this->isInRange(analogValue, this->_buttonsValues[btnIndex]))
+                if (isInRange(analogValue, this->_buttonsValues[btnIndex]))
                 {
                     isNotContain = false;
                     break;
@@ -119,4 +119,4 @@ bool LcdKeypadShield::isInRange(const int &analogValue, const int &etalonValue)
     }
 
     return analogBtnValue / checkIterations;
-}*/
+}
