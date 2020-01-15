@@ -1,3 +1,4 @@
+#include <Wire.h>
 #include <LiquidCrystal.h>
 #include "Button.h"
 #include "BoardType.h"
@@ -53,13 +54,13 @@ public:
     /*Manual setting of analog button value*/
     void setButtonAnalogValue(const Button &button,const int &analogButtonValue);
 
-    /*Automatically adjust button values using the user menu.
-    The method helps a lot if you need to constantly change the shield or if you need quick setup*/
-    int userButtonsAutoCorrect();
-
     /*Returns the deviation of the resistor values ​​when the button contacts fluctuate*/
-    int getResistorDeviation();
+    //int getResistorDeviation();
 
     /*Set the deviation of the resistor values ​​when the button contacts fluctuate*/
-    void setResistorDeviation(const int &resistorDeviation);
+    //void setResistorDeviation(const int &resistorDeviation);
+    
+    /*Automatically adjust button values using the user menu.
+    The method helps a lot if you need to constantly change the shield or if you need quick setup*/
+    //void userButtonsAutoCorrect();
 };

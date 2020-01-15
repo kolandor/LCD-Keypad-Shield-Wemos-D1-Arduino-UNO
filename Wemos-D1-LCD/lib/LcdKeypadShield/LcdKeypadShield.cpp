@@ -34,7 +34,7 @@ LcdKeypadShield LcdKeypadShield::createByBoaard(const BoardType &board)
 
 bool LcdKeypadShield::isAvailableButton()
 {
-    return !isInRange(analogRead(this->_analogBtnPin), this->_noKeyAnalogValue);//////////////////ОШИБКА ПО КАКОЙТО ПРИЧИНЕ ИМЕННО В ЭТОМ МЕСТЕ
+    return !isInRange(analogRead(this->_analogBtnPin), this->_noKeyAnalogValue);
 }
 
 Button LcdKeypadShield::getButton()
@@ -55,14 +55,9 @@ Button LcdKeypadShield::getButton()
     return None;
 }
 
-void LcdKeypadShield::setButtonAnalogValue(const Button &button,const int &analogButtonValue)
+/*void LcdKeypadShield::setButtonAnalogValue(const Button &button,const int &analogButtonValue)
 {
     this->_buttonsValues[static_cast<int>(button)] = analogButtonValue;
-}
-
-int LcdKeypadShield::userButtonsAutoCorrect()
-{
-    return isAvailableButton();//getAverageBtnValue();
 }
 
 int LcdKeypadShield::getResistorDeviation()
@@ -75,6 +70,11 @@ void LcdKeypadShield::setResistorDeviation(const int &resistorDeviation)
     this->_resistorCurrentDeviation = resistorDeviation;
 }
 
+void LcdKeypadShield::userButtonsAutoCorrect()
+{
+
+}*/
+
 //////////////////////////////////////PRIVATE METHODS//////////////////////////////////////
 
 bool LcdKeypadShield::isInRange(const int &analogValue, const int &etalonValue)
@@ -82,7 +82,7 @@ bool LcdKeypadShield::isInRange(const int &analogValue, const int &etalonValue)
     return this->_resistorCurrentDeviation - etalonValue < analogValue && etalonValue + this->_resistorCurrentDeviation > analogValue;
 }
 
-int LcdKeypadShield::getAverageBtnValue()
+/*int LcdKeypadShield::getAverageBtnValue()
 {
     const int checkIterations = 10;
 
@@ -96,7 +96,7 @@ int LcdKeypadShield::getAverageBtnValue()
     {
         analogValue = analogRead(this->_analogBtnPin);
 
-        if (!this->isInRange(analogValue, this->_noKeyAnalogValue))//////////////////ОШИБКА ПО КАКОЙТО ПРИЧИНЕ ИМЕННО В ЭТОМ МЕСТЕ
+        if (!this->isInRange(analogValue, this->_noKeyAnalogValue))
         {
             bool isNotContain = true;
 
@@ -112,11 +112,11 @@ int LcdKeypadShield::getAverageBtnValue()
             if (isNotContain)
             {
                 analogBtnValue += analogValue;
-                i++;//////////////////НЕ ПОНЯТНА КОРРИЛЯЦИЯ
+                i++;
             }
         }
         delay(300);
     }
 
     return analogBtnValue / checkIterations;
-}
+}*/
