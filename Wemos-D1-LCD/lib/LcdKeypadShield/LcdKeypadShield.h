@@ -23,7 +23,7 @@ private:
     int _resistorCurrentDeviation;
     
     //Buttons analog values
-    int _buttonsValues[_buttonsCount]{_noKeyAnalogValue};
+    int _buttonsValues[_buttonsCount]{0};
 
     /*Check if the value is within the deviation with the resistor*/
     bool isInRange(const int &analogValue,const int &etalonValue);
