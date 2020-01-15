@@ -55,12 +55,12 @@ Button LcdKeypadShield::getButton()
     return None;
 }
 
-/*void LcdKeypadShield::setButtonAnalogValue(const Button &button,const int &analogButtonValue)
+void LcdKeypadShield::setButtonAnalogValue(const Button &button,const int &analogButtonValue)
 {
     this->_buttonsValues[static_cast<int>(button)] = analogButtonValue;
 }
 
-int LcdKeypadShield::getResistorDeviation()
+/*int LcdKeypadShield::getResistorDeviation()
 {
     return this->_resistorCurrentDeviation;
 }
@@ -96,11 +96,11 @@ int LcdKeypadShield::getAverageBtnValue()
     {
         analogValue = analogRead(this->_analogBtnPin);
 
-        if (!isInRange(analogValue, (int)this->_noKeyAnalogValue))
+        if (!isInRange(analogValue, (int)LcdKeypadShield::_noKeyAnalogValue))
         {
             bool isNotContain = true;
 
-            for (size_t btnIndex = 0; btnIndex < this->_buttonsCount; btnIndex++)
+            for (size_t btnIndex = 0; btnIndex < LcdKeypadShield::_buttonsCount; btnIndex++)
             {
                 if (isInRange(analogValue, this->_buttonsValues[btnIndex]))
                 {
