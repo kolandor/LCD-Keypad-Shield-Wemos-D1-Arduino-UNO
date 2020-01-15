@@ -30,6 +30,9 @@ private:
 
     /*Get average analog value for user set*/
     int getAverageBtnValue();
+
+    /*User request to set the button value*/
+    void reqSetBtnValue(const char * reqText, Button btn);
     
 public:
     //Arbitrary connection of pins to LCD

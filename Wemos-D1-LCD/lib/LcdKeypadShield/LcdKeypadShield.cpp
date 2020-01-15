@@ -76,7 +76,11 @@ void LcdKeypadShield::setResistorDeviation(const int &resistorDeviation)
 
 void LcdKeypadShield::userButtonsAutoCorrect()
 {
-    
+    reqSetBtnValue("Hold Select btn", Select);
+    reqSetBtnValue("Hold Left btn", Left);
+    reqSetBtnValue("Hold Right btn", Right);
+    reqSetBtnValue("Hold Up btn", Up);
+    reqSetBtnValue("Hold Down btn", Down);
 }
 
 //////////////////////////////////////PRIVATE METHODS//////////////////////////////////////
@@ -123,4 +127,23 @@ int LcdKeypadShield::getAverageBtnValue()
     }
 
     return analogBtnValue / checkIterations;
+}
+
+void LcdKeypadShield::reqSetBtnValue(const char * reqText, Button btn)
+{
+    clear();
+    print(reqText);
+    
+    int btnAnalogVal = getAverageBtnValue();
+    
+    setCursor(0,1);
+    print("Btn val: ");
+    print(btnAnalogVal);
+    
+    this->_buttonsValues[static_cast<int>(btn)] = btnAnalogVal;
+    
+    while (isInRange(analogRead(A0), this->_buttonsValues[static_cast<int>(btn)]))
+    {
+        delay(100);
+    }
 }
