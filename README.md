@@ -9,6 +9,42 @@ Functional:
 - Setting Button Values
 - Management of deviations of analog values of buttons
 
-Includes usage example
-
 In this example, I will show how using [this](https://github.com/kolandor/Wemos-D1-as-Arduino-UNO-pins) you can connect the Arduino Display Shield to Wemos D1
+
+**Quick start Wemos D1 R1**
+```cpp
+//Create oobject by board type
+LcdKeypadShield lcd = LcdKeypadShield::createByBoaard(WemosD1R1);
+
+void setup() 
+{
+  //set lcd size
+  lcd.begin(16,2);
+  //Auto set buttons values
+  lcd.userButtonsAutoCorrect();
+}
+
+void loop()
+{
+  //CODE
+}
+```
+
+**Quick start UNO**
+```cpp
+//Create oobject by board type
+LcdKeypadShield lcd = LcdKeypadShield::createByBoaard(UNO);
+
+void setup() 
+{
+  //set lcd size
+  lcd.begin(16,2);
+  //Auto set buttons values
+  lcd.userButtonsAutoCorrect();
+}
+
+void loop()
+{
+  //CODE
+}
+```
